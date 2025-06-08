@@ -1,21 +1,21 @@
+import java.util.*;
+
 class Solution {
     public int[] solution(String s) {
-        String[] arr = s.split("");
         int[] answer = new int[s.length()];
+        Map<Character, Integer> lastSeen = new HashMap<>();
         
-        for(int i = 0; i < arr.length; i++){
-            answer[i] = -1;
-            for(int j = i - 1; j >= 0; j--){
-                if(arr[i].equals(arr[j])){
-                    int ans = i - j;
-                    answer[i] = ans;
-                    break;
-                }
-                
-                if(j == 0){
-                    answer[i] = -1;
-                }
+        for(int i = 0; i < s.length(); i++){
+            char ch = s.charAt(i);
+            
+            if(lastSeen.containsKey(ch)){
+                answer[i] = i - lastSeen.get(ch);
+            } else{
+                answer[i] =- 1;
             }
+            
+            lastSeen.put(ch, i);
+            
         }
         return answer;
     }
