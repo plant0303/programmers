@@ -3,9 +3,16 @@ import java.util.*;
 class Solution {
     public int solution(int[] nums) {
         int answer = 0;
-        int maxSelect = nums.length/2;
-        long uniqueCount = Arrays.stream(nums).distinct().count();
+        HashSet<Integer> hs = new HashSet<>();
+        
+        for(int i = 0; i < nums.length; i++){
+            hs.add(nums[i]);
+        }
+        
+        if(hs.size() > nums.length / 2) {
+            return nums.length / 2;
+        }
 
-        return (int)Math.min(uniqueCount, maxSelect);
+        return hs.size();
     }
 }
